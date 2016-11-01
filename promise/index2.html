@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function Promise(fn) {
+        //需要成功以及成功时的回调
+        var state = 'pending';
+        var doneList=[];
+        //一个实例化的方法，用来注册异步事件
+        this.then = function (done,fail) {
+            switch (state){
+                case 'pending' :
+                    doneList.push(done);
+                    return this;
+                    break;
+                case 'fulfilled':
+                    done();
+                    return this
+                    break;
+            }
+
+        }
+
+        function resolve(newValue) {
+            state = 'fulfilled';
+            var value = newValue;
+
+            setTimeout(function () {
+                doneList.forEach(function (fulfill) {
+                  value = fulfill(value)
+                });
+            },0)
+        }
+        fn(resolve);
+    }
+
+    var p = new Promise(function (reslove) {
+        setTimeout(reslove,100);
+    });
+
+    p.then(function () {
+        console.log('success')
+    },function () {
+        console.log('fail')
+    })
+</script>
+</html>
