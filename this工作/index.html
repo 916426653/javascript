@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="appendHere"></div>
+<button id="clickMe">Click Me</button>
+</body>
+<script src="../lib/jquery.js"></script>
+<script>
+    /**
+     * 如果this没有被设置，则默认指向全局对象，其通常是window
+     如果一个函数中运行了一个内联函数，比如一个事件监听器，则this指向内联函数的源代码。例如,当设置一个按钮的单击处理程序,this将引用匿名函数内的按钮。
+     如果函数是一个对象的构造函数，this指向新对象。
+     如果函数被定义在一个对象上,然后调用对象时,this指向该对象。
+     * */
+    var div = $('#appendHere');
+
+    $('#clickMe').on('click',function () {
+        var that = this;
+        div.append(checkForWindow(this));
+
+        setTimeout(function () {
+            div.append(checkForWindow(this));
+            div.append('<strong>that</strong> is the ' + that.tagName + '<br/>');
+        },300)
+    })
+</script>
+</html>

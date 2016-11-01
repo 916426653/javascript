@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function foo() {
+        var x = 10;
+        return function () {
+            console.log(x)
+        }
+    }
+
+    var returnedFunction = foo();
+
+    var x = 20;
+
+    returnedFunction();//10  not 20
+
+
+
+    var x1 = 10;
+
+    function foo1() {
+       console.log(x1)
+    }
+
+    (function (funArg) {
+        var x1 = 20;
+        funArg() //10 not 20
+    })(foo1)
+</script>
+</html>

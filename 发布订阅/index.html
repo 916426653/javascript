@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var makePushSub = function () {
+        var callbacks = {},
+                publish=function(){
+
+                    var args=Array.prototype.slice.call(arguments,0);
+                    console.log(args)
+
+
+                    var ev=args.shift();
+                    console.log(ev)
+
+
+                    var list,i,l;
+                    if(!callbacks[ev]){
+                        return this;
+                    }
+                    list=callbacks[ev];
+
+
+                    for(i=0,l=list.length;i<l;i++){
+                        list[i].apply(this,args);
+                    }
+
+                    return this;
+                },
+                subscribe = function (ev,callback) {
+                    if(!callbacks[ev]){
+                        callbacks[ev] = [];
+                    }
+                    callbacks[ev].push(callback);
+                    return this;
+                };
+                return {pub:publish,sub:subscribe};
+    }
+
+    test = makePushSub();
+    test.sub('alert',function () {
+        alert('hello')
+    })
+    test.sub('alert2',function () {
+        alert('hello2')
+    })
+    test.sub('alert3',function () {
+        alert('hello4')
+    })
+    test.pub('alert')
+    test.pub('alert2')
+    test.pub('alert3')
+
+
+</script>
+</html>

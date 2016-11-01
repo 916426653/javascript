@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="containerOuter" style="border: 1px solid black; width: 100px; padding: 20px">
+    <div id="containerInner" style="border: 1px solid black; width:80px; padding: 10px">
+        <button id="button1">1</button>
+        <button id="button2">2</button>
+    </div>
+</div>
+<br/>
+<div id="EventListing"></div>
+</body>
+<script src="../lib/jquery.js"></script>
+<script>
+    var nodes = $('*'),
+            node = {};
+            for(var i = 0;i<nodes.length;i++){
+                node = nodes[i];
+                node.addEventListener('click',function (event) {
+                    if(event.currentTarget != event.target){
+                        $('#EventListing ').append('Capture ' +  (event.currentTarget.id || event.currentTarget.tagName) + ' <br/>');
+                    }
+                },true)
+            }
+</script>
+</html>

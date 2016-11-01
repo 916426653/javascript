@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		/*
+		 *除了指定
+		 * 
+		 * */
+		function Foo (y){
+			this.y = y;
+		}
+		Foo.prototype.x = 10;
+		Foo.prototype.calculate=function(z){
+			return this.x + this.y +z;
+		}
+		var b = new Foo(20);
+		var c = new Foo(30);
+		var b1 = b.calculate(30);
+		var c1 = c.calculate(40);
+		console.log([b1,c1]);
+		
+	</script>
+</html>
